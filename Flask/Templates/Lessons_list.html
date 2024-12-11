@@ -1,0 +1,93 @@
+<html>
+    <head>
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+        <title>Список</title>
+        <style>
+
+          .hweek {
+            display: flex;
+            width: 1200px;
+            height: 460px;
+            gap: 50px;
+            font-size: 200%;
+            margin: auto;
+            
+          }
+
+          .sec {
+            margin-top: 50px;
+          }
+
+          ul {
+            width: 350px;
+            height: 400px;
+            background-color: rgba(150, 255, 239, 0.75);
+            border: solid black 2px;
+            padding: 10px;
+            border-radius: 10px 30px;
+            line-height: 1em;
+            list-style-type: none;
+            font-family: "Montserrat", sans-serif;
+          }
+
+          li {
+            font-family: "Vollkorn", serif;
+            margin-top: 10px;
+          }
+
+          select {
+            font-size: 1.5em;
+          }
+
+        </style>
+    </head>
+
+    <body>
+          
+          <div id="vm">
+            <select v-model="text">
+              <option disabled value="">Пожалуйста, выберите одно</option>
+              <option :value="{{ Class11A }}">11A</option>
+              <option :value="{{ Class11B }}">11Б</option>
+              <option :value="{{ Class11C }}">11В</option>
+            </select>
+
+
+            <div class="hweek">
+              <ul>Понедельник
+                <li v-for="(item, index) in text[0]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+              <ul>Вторник
+                <li v-for="(item, index) in text[1]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+              <ul>Среда
+                <li v-for="(item, index) in text[2]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+            </div>
+
+            <div class="hweek sec">
+              <ul>Четверг
+                <li v-for="(item, index) in text[3]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+              <ul>Пятница
+                <li v-for="(item, index) in text[4]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+              <ul>Суббота
+                <li v-for="(item, index) in text[5]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+          <script src="{{ url_for('static', filename='index.js') }}"></script>
+    </body>
+</html>

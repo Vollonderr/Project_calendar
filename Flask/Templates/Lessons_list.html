@@ -45,42 +45,79 @@
 
           select {
             font-size: 1.5em;
+            border-radius: 10px;
+          }
+
+          form {
+            display: inline;
+            margin-left: 50px;
+            border-radius: 10px;
           }
 
         </style>
     </head>
 
     <body>
-          
-          <div id="vm">
-            <select v-model="text">
-              <option disabled value="">Пожалуйста, выберите одно</option>
-              <option :value="{{ Class11A }}">11A</option>
-              <option :value="{{ Class11B }}">11Б</option>
-              <option :value="{{ Class11C }}">11В</option>
-            </select>
 
+            <div id="vm">
+              <select v-model="text">
+                <option disabled value="">Пожалуйста, выберите одно</option>
+                <option :value="{{ Class11A }}">11A</option>
+                <option :value="{{ Class11B }}">11Б</option>
+                <option :value="{{ Class11C }}">11В</option>
+              </select>
+
+              <form action="/update" method="POST">
+                <input placeholder="Класс" type="text" name="numclas" value="">
+                <input placeholder="День недели" type="text" name="dayWeek" value="">
+                <input placeholder="Номер урока" type="text" name="numles" value="">
+                <input placeholder="Новый урок" type="text" name="lesson" value="">
+                <input type="submit" value="Update">
+              </form>
 
             <div class="hweek">
-              <ul>Понедельник
+              
+              <ul v-if="valve === 1" :style="{backgroundColor: 'rgba(150, 155, 239, 0.75)'}">Понедельник - сегодня
                 <li v-for="(item, index) in text[0]">[[ index+1 ]]. [[ item ]]</li>
               </ul>
-              <ul>Вторник
+              <ul v-else>Понедельник
+                <li v-for="(item, index) in text[0]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+
+              <ul v-if="valve === 2" :style="{backgroundColor: 'rgba(150, 155, 239, 0.75)'}">Вторник - сегодня
                 <li v-for="(item, index) in text[1]">[[ index+1 ]]. [[ item ]]</li>
               </ul>
-              <ul>Среда
+              <ul v-else>Вторник
+                <li v-for="(item, index) in text[1]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+
+              <ul v-if="valve === 3" :style="{backgroundColor: 'rgba(150, 155, 239, 0.75)'}">Среда - сегодня
+                <li v-for="(item, index) in text[2]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+              <ul v-else>Среда
                 <li v-for="(item, index) in text[2]">[[ index+1 ]]. [[ item ]]</li>
               </ul>
             </div>
 
             <div class="hweek sec">
-              <ul>Четверг
+              <ul v-if="valve === 4" :style="{backgroundColor: 'rgba(150, 155, 239, 0.75)'}">Четверг - сегодня
                 <li v-for="(item, index) in text[3]">[[ index+1 ]]. [[ item ]]</li>
               </ul>
-              <ul>Пятница
+              <ul v-else>Четверг
+                <li v-for="(item, index) in text[3]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+
+              <ul v-if="valve === 5" :style="{backgroundColor: 'rgba(150, 155, 239, 0.75)'}">Пятница - сегодня
                 <li v-for="(item, index) in text[4]">[[ index+1 ]]. [[ item ]]</li>
               </ul>
-              <ul>Суббота
+              <ul v-else>Пятница
+                <li v-for="(item, index) in text[4]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+
+              <ul v-if="valve === 6" :style="{backgroundColor: 'rgba(150, 155, 239, 0.75)'}">Суббота - сегодня
+                <li v-for="(item, index) in text[5]">[[ index+1 ]]. [[ item ]]</li>
+              </ul>
+              <ul v-else>Суббота
                 <li v-for="(item, index) in text[5]">[[ index+1 ]]. [[ item ]]</li>
               </ul>
             </div>

@@ -2,12 +2,18 @@
     margin: auto;
     margin-top: 1vh;
     width: 50vw;
-    height: 88vh;
-    border: solid black 3px;
+    height: 91vh;
+    border: solid rgba(0, 0, 0, 0.6) 3px;
+    border-radius: 20px;
     overflow: auto;
 }
 
+.pressed, .pressed:hover, .pressed:active, .pressed:focus {
+    background-color: rgba(148, 241, 148, 0.5);
+  }
+
 h1, h2, h3 {
+    font-family: "Vollkorn", serif;
     text-align: center;
     margin-top: 30px;
     padding-bottom: 10px;
@@ -18,11 +24,30 @@ h1, h2, h3 {
     justify-content: center;
     margin-top: 1vh;
     height: 2vh;
+    gap: 10px;
 }
 
 p {
+    font-family: "Comfortaa", serif;
+    font-size: 0.9em;
     margin-top: -20px;
     margin-left: 10px;
+}
+
+.pp {
+    margin-top: -15px;
+}
+
+label {
+    font-family: "Comfortaa", serif;
+    font-size: 0.8em;
+}
+
+button {
+    cursor: pointer;
+    font-family: "Montserrat", serif;
+    border: solid black 1px;
+    border-radius: 5px;
 }
 
 input {
@@ -37,8 +62,9 @@ ul {
 
 li, .add, .button_add {
     width: 15vw;
-    height: 40vh;
+    height: 39vh;
     border: dotted black 2px;
+    border-radius: 10px;
     list-style-type: none;
     overflow: auto;
 }
@@ -50,15 +76,15 @@ li, .add, .button_add {
     border: 0px;
 }
 
-.button_del:hover, .button_update:hover, .button_add:hover {
+button:hover {
     background-color: rgb(220, 220, 220);
 }
 
-.button_del:focus, .button_update:focus, .button_add:focus {
+button:focus {
     background-color: rgb(203, 203, 203);
 }
 
-.button_del:active, .button_update:active, .button_add:active {
+button:active {
     background-color: rgb(180, 180, 180);
 }
 
@@ -72,4 +98,8 @@ li, .add, .button_add {
 .confirm, .back {
     display:block;
     margin: 0 auto;
+}
+
+.complete {
+    background-color: green;
 }

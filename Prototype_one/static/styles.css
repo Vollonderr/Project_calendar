@@ -1,6 +1,21 @@
+.all {
+    display: flex;
+}
+
+.inf {
+    margin: auto;
+}
+
+.inf_all {
+    display: flex;
+    flex-direction: column;
+    margin-left: 7vw;
+    margin-bottom: 25vh;
+}
+
 .taskboard {
     margin: auto;
-    margin-top: 1vh;
+    margin-top: 3vh;
     width: 50vw;
     height: 91vh;
     border: solid rgba(0, 0, 0, 0.6) 3px;
@@ -106,3 +121,20 @@ button:active {
 .complete {
     background-color: green;
 }
+
+.flash {
+    position: fixed;
+    text-align: center;
+    float: left;
+    width: 17vw;
+    padding: 1vw;
+    margin-left: 0.8vw;
+    border: solid black 1px;
+    border-radius: 5px;
+    animation: fadeinout 7s linear forwards;
+}
+
+@keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    50% { opacity: 1; }
+  }

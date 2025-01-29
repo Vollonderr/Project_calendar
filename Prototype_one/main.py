@@ -17,7 +17,8 @@ def get_event_add():
 	status = request.form['status']
 
 	if '' in [name, start, supervisor, note]:
-		return 'Заполнены не все поля!'
+		flash('Ошибка: заполнены не все поля!')
+		return redirect("/")
 	if end == '':
 		add_event(name, start, '0', supervisor, note, importance, status)
 		flash("Заметка \"" + name + "\" была успешна добавлена!")
@@ -40,9 +41,9 @@ def get_event_update():
 	status = request.form['status']
 	ROWID = request.form['ROWID']
 
-	print(start, end)
 	if '' in [name, start, supervisor, note]:
-		return 'Заполнены не все поля!'
+		flash('Ошибка: заполнены не все поля!')
+		return redirect("/")
 	if end == '':
 		update_event(name, start, '0', supervisor, note, importance, status, ROWID)
 		flash("Мероприятие \"" + realname + "\" было успешно обновлено!")

@@ -1,4 +1,4 @@
-from models import get_events, add_event, update_event, delete_event
+from models import get_events, get_workers, add_event, update_event, delete_event
 
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, flash
@@ -8,11 +8,11 @@ app.config['SECRET_KEY'] = 'JH_2tg-LxpEiSMFq3f8Cyey_h'
 
 @app.route('/add', methods=['POST'])
 def get_event_add():
-	name = request.form['name']
+	name = request.form['name'].capitalize()
 	start = request.form['start']
 	end = request.form['end']
 	supervisor = request.form['supervisor']
-	note = request.form['note']
+	note = request.form['note'].capitalize()
 	importance = request.form['importance']
 	status = request.form['status']
 
@@ -31,15 +31,18 @@ def get_event_add():
 
 @app.route('/update', methods=['POST'])
 def get_event_update():
-	name = request.form['name']
+	name = request.form['name'].capitalize()
 	realname = request.form['realname']
 	start = request.form['start']
 	end = request.form['end']
 	supervisor = request.form['supervisor']
-	note = request.form['note']
+	note = request.form['note'].capitalize()
 	importance = request.form['importance']
 	status = request.form['status']
 	ROWID = request.form['ROWID']
+
+	name = name.capitalize()
+	note = note.capitalize()
 
 	if '' in [name, start, supervisor, note]:
 		flash('Ошибка: заполнены не все поля!')
@@ -64,7 +67,7 @@ def get_del():
 
 @app.route('/')
 def index():
-	return render_template("Notes.html", **{"notes": get_events()})
+	return render_template("Notes.html", **{"events": get_events(), "workers": get_workers()})
 
 if __name__ == '__main__':
 	app.run(debug=True)

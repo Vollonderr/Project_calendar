@@ -2,7 +2,9 @@ const vm = new Vue({
     el: '#vm',
     delimiters: ['[[', ']]'],
     data: () => ({
-      events_count: 0,
+      name_select: '',
+      note_select: '',
+      supervisor_select: '',
       update_value: '',
       importance_change: '',
       status_change: '',
@@ -10,7 +12,7 @@ const vm = new Vue({
       valve_date: false
     }),
     methods:{
-      get_events: function(e) {
+      get_info: function(e) {
         return e.slice(0)
       },
 
@@ -26,6 +28,11 @@ const vm = new Vue({
 
       get_valve_date: function(e) {
         if(e == 0) return true
+        else return false
+      },
+
+      get_select: function(e, c) {
+        if(c.toLowerCase().search(e.toLowerCase()) != -1) return true
         else return false
       }
 

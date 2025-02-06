@@ -52,7 +52,8 @@ def get_event_update():
 		flash("Мероприятие \"" + realname + "\" было успешно обновлено!")
 		return redirect("/")
 	if datetime.strptime(start, '%Y-%m-%d') > datetime.strptime(end, '%Y-%m-%d'):
-		return 'Дата начала срока должна быть после даты конца срока!'
+		flash("Дата начала срока должна быть после даты конца!")
+		return redirect("/")
 	update_event(name, start, end, supervisor, note, importance, status, ROWID)
 	flash("Мероприятие \"" + realname + "\" было успешно обновлено!")
 	return redirect("/")

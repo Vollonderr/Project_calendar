@@ -14,46 +14,84 @@
 <body>
     <div id="vm">
 
-        <div class="all">
+        <div :style="{ color: color_text, 'background-color': color_BG }" class="all">
 
             <aside>
+                <p style="margin-top: 3vh; text-align: center;">Поиск</p>
                 <div class="select_buttons">
-                    <button @click="importance_change = '', status_change = '', name_select = '',
+                    <button :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" @click="importance_change = '', status_change = '', name_select = '',
                     note_select = '', supervisor_select = '', date_select1 = '', date_select2 = ''">все мероприятия</button>
                 </div>
 
-                <div class="select_buttons">
-                    <button :class="{ pressed: importance_change == '0' }" @click="importance_change = '0'">Обычные</button>
-                    <button :class="{ pressed: importance_change == '1' }" @click="importance_change = '1'">Важные</button>
-                    <button :class="{ pressed: importance_change == '2' }" @click="importance_change = '2'">Особо</button>
+                <div  class="select_buttons">
+                    <button :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" :class="{ pressed: importance_change == '0' }" @click="importance_change = '0'">Обычные</button>
+                    <button :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" :class="{ pressed: importance_change == '1' }" @click="importance_change = '1'">Важные</button>
+                    <button :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" :class="{ pressed: importance_change == '2' }" @click="importance_change = '2'">Особо</button>
                 </div>
 
                 <div style="margin-top: 0.3vh;" class="select_buttons">
-                    <button :class="{ pressed: status_change == '0' }" @click="status_change = '0'">Незавершенные</button>
-                    <button :class="{ pressed: status_change == '1' }" @click="status_change = '1'">Завершенные</button>
+                    <button :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" :class="{ pressed: status_change == '0' }" @click="status_change = '0'">Незавершенные</button>
+                    <button :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" :class="{ pressed: status_change == '1' }" @click="status_change = '1'">Завершенные</button>
                 </div>
 
-                <p style="margin-top: 2vh; text-align: center;">Расширенный поиск</p>
+                <p style="margin-top: 3vh; text-align: center;">Расширенный поиск</p>
                 <div class="select_buttons">
-                    <input v-model="name_select" placeholder="Название">
-                    <input v-model="note_select" placeholder="Примечание">
-                    <select name="supervisor" v-model="supervisor_select">
+                    <input :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" v-model="name_select" placeholder="Название">
+                    <input :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" v-model="note_select" placeholder="Примечание">
+                    <select :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" name="supervisor" v-model="supervisor_select">
                         <option value="">Все работники</option>
                         <option v-for="n in get_info({{ workers }})">[[ n[0] ]]</option>
                     </select>
                 </div>
 
                 <div class="select_buttons">
-                    <input type="date" v-model="date_select1">
-                    <input type="date" v-model="date_select2" :disabled="date_select1 == ''">
-                </div>  
+                    <input :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" type="date" v-model="date_select1">
+                    <input :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" type="date" v-model="date_select2" :disabled="date_select1 == ''">
+                </div>
+                
+                <p style="margin-top: 3vh; text-align: center;">Характеристики работников</p>
+                <div :style="{ 'background-color': color_BGLOW, 'border-color': color_lines, 'border-color': color_lines }" class="worker_info">
+                    <select :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" style="margin: 5px;" name="supervisor" v-model="supervisor_info_select">
+                        <option value=""></option>
+                        <option v-for="n in get_info({{ workers }})">[[ n[0] ]]</option>
+                    </select>
+                    <div v-for="n in get_info({{ workers }})" v-if="n[0] == supervisor_info_select">
+                        <p :style="{ color: color_text }" v-if="n[1] == 'м'" style="margin-top: 20px;">Пол: мужской</p>
+                        <p :style="{ color: color_text }" v-else="" style="margin-top: 20px;">Пол: женский</p>
+                        <p :style="{ color: color_text }" style="margin-top: 10px;">Возраст: [[ n[2] ]]</p>
+                        <p :style="{ color: color_text }" style="margin-top: 10px;">Род деятельности: [[ n[3] ]]</p>
+                        <p :style="{ color: color_text }" style="margin-top: 10px;">Кабинет: [[ n[4] ]]</p>
+                        <p :style="{ color: color_text }" style="margin-top: 10px;">Телефон: [[ n[5] ]]</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 3vh; text-align: center;">Стиль календаря</p>
+                <div class="color_block" v-for="color in get_info({{ colors }})">
+                    <form action="/update_colors" method="POST">
+                        <input type="hidden" v-if="color_change(color[0], color[1], color[2], color[3])">
+                        <input class="color_panels" type="color" v-model="color_text" name="text">
+                        <input class="color_panels" type="color" v-model="color_BG" name="BG">
+                        <input class="color_panels" type="color" v-model="color_BGLOW" name="BGLOW">
+                        <input class="color_panels" type="color" v-model="color_lines" name="lines">
+                        <div>
+                            <label style="margin-left: 0.3vw;">текст</label>
+                            <label style="margin-left: 3vw;">фон</label>
+                            <label style="margin-left: 2.8vw;">блоки</label>
+                            <label style="margin-left: 2.1vw;">границы</label>
+                        </div>
+                        <button :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" class="color_submit" type="submit">Сохранить</button>
+                    </form>
+                </div>
+
+                {% for msg in get_flashed_messages() %}
+                    <div :style="{ color: color_text, 'background-color': color_BGLOW, 'border-color': color_lines }" class="flash">{{ msg }}</div>
+                {% endfor %}
             </aside>
 
             <header>
                 <h1>Онлайн-календарь мероприятий</h1>
-                <label>[[ count ]]</label>
                 <ul>
-                    <li v-for="i in get_info({{ events }})" v-if="(i[5] == importance_change || importance_change == '') && (i[6] == status_change || status_change == '')
+                    <li :style="{ 'background-color': color_BGLOW, 'border-color': color_lines }" v-for="i in get_info({{ events }})" v-if="(i[5] == importance_change || importance_change == '') && (i[6] == status_change || status_change == '')
                                                                     && (name_select == '' || get_select(name_select, i[0])) && (note_select == '' || get_select(note_select, i[4]))
                                                                     && (supervisor_select == '' || get_select(supervisor_select, i[3]))
                                                                     && (date_select1 == '' && date_select2 == '' || get_select_date(date_select1, date_select2, i[1], i[2]))">

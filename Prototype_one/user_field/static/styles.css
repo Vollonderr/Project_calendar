@@ -67,6 +67,12 @@ button {
     border-radius: 5px;
 }
 
+.color_submit {
+    margin-left: 3vw;
+    margin-top: 1vw;
+    font-size: 0.9em;
+}
+
 input {
     font-size: 0.7em;
     font-family: "Montserrat", serif;
@@ -100,3 +106,35 @@ button:focus {
 button:active {
     background-color: rgb(180, 180, 180);
 }
+
+.worker_info {
+    height: 20vh;
+    width: 30vw;
+    border: dotted black 2px;
+}
+
+.color_block {
+    margin-left: 7vw;
+    margin-top: 1vh;
+}
+
+.color_panels {
+    margin-right: 2vw;
+}
+
+.flash {
+    position: fixed;
+    text-align: center;
+    width: 22vw;
+    padding: 1vw;
+    margin-top: 2vh;
+    margin-left: 3vw;
+    border: solid black 1px;
+    border-radius: 5px;
+    animation: fadeinout 7s linear forwards;
+}
+
+@keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    50% { opacity: 1; }
+  }

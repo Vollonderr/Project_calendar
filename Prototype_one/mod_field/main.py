@@ -1,4 +1,4 @@
-from models import get_events, get_workers, add_event, update_event, delete_event
+from models import get_events, get_workers, get_colors, add_event, update_event, delete_event, update_colors
 
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, flash
@@ -58,6 +58,16 @@ def get_event_update():
 	flash("Мероприятие \"" + realname + "\" было успешно обновлено!")
 	return redirect("/")
 
+@app.route('/update_colors', methods=['POST'])
+def get_colors_update():
+	text = request.form['text']
+	BG = request.form['BG']
+	BGLOW = request.form['BGLOW']
+	lines = request.form['lines']
+	update_colors(text, BG, BGLOW, lines)
+	flash("Стиль успешно обновлен!")
+	return redirect("/")
+
 @app.route('/delete', methods=['POST'])
 def get_del():
 	ROWID = request.form['ROWID']
@@ -68,7 +78,7 @@ def get_del():
 
 @app.route('/')
 def index():
-	return render_template("Notes.html", **{"events": get_events(), "workers": get_workers()})
+	return render_template("Notes.html", **{"events": get_events(), "workers": get_workers(), "colors": get_colors()})
 
 if __name__ == '__main__':
 	app.run(debug=True)

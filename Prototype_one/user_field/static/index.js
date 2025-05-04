@@ -6,10 +6,16 @@ const vm = new Vue({
       name_select: '',
       note_select: '',
       supervisor_select: '',
+      supervisor_info_select: '',
       date_select1: '',
       date_select2: '',
       importance_change: '',
-      status_change: ''
+      status_change: '',
+      color_text: '',
+      color_BG: '',
+      color_BGLOW: '',
+      color_lines: '',
+      valve_color: true
     }),
     methods:{
       get_info: function(e) {
@@ -19,6 +25,17 @@ const vm = new Vue({
       get_select: function(e, c) {
         if(c.toLowerCase().search(e.toLowerCase()) != -1) return true
         else return false
+      },
+
+      color_change: function(text, BG, BGLOW, lines) {
+        if(this.valve_color == true) {
+          this.color_text = text
+          this.color_BG = BG
+          this.color_BGLOW = BGLOW
+          this.color_lines = lines
+          this.valve_color = false
+        }
+        return this.valve_color
       },
 
       get_select_date: function(e1, e2, c1, c2) {

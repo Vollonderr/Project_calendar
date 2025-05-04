@@ -89,9 +89,21 @@ li, .add, .button_add {
     width: 15vw;
     height: 43vh;
     border: dotted black 2px;
+    background-color: white;
     border-radius: 10px;
     list-style-type: none;
     overflow: auto;
+}
+
+.button_add {
+    width: 15.15vw;
+    height: 43.38vh;
+}
+
+.color_submit {
+    margin-left: 3vw;
+    margin-top: 1vw;
+    font-size: 0.9em;
 }
 
 .button_del, .button_update {
@@ -116,14 +128,15 @@ button:active {
 }
 
 .input_note_update {
-    display:block;
+    display: block;
     margin: 0 auto;
     width:13vw;
     height:10vh;
 }
 
 .confirm, .back {
-    display:block;
+    display: flex;
+    display: block;
     margin: 0 auto;
 }
 
@@ -131,10 +144,25 @@ button:active {
     background-color: green;
 }
 
+.worker_info {
+    height: 20vh;
+    width: 30vw;
+    border: dotted black 2px;
+}
+
+.color_block {
+    margin-left: 7vw;
+    margin-top: 1vh;
+}
+
+.color_panels {
+    margin-right: 2vw;
+}
+
 .flash {
     position: fixed;
     text-align: center;
-    width: 20vw;
+    width: 22vw;
     padding: 1vw;
     margin-top: 2vh;
     margin-left: 3vw;

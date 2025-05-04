@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Список</title>
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <script type="importmap">
+            {
+              "imports": {
+                "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+              }
+            }
+          </script>
+          
+          <div id="app">
+            <h1>TASKS</h1>
+            <form @submit.prevent="addTodo">
+                <input v-model="todo" placeholder="What are we doing?">
+                <button>Подтвердить</button>
+            </form>
+            <ul>
+                <li v-for="task in list">{{ task.id }}: {{ task.text }} <button @click="removeTodo(task)">X</button></li>
+            </ul>
+          </div>
+
+          <script type="module">
+            import { createApp, ref, reactive } from 'vue'
+
+            createApp({
+              setup() {
+                let id = 0
+
+                var todo = ref('')
+                var list = ref([])
+
+                function addTodo() {
+                    list.value.push({id: id++, text: todo.value})
+                    todo.value = ''
+                }
+
+                function removeTodo(todo) {
+                    list.value = list.value.filter((t) => t !== todo)
+                }
+
+                return {
+                    id,
+                    todo,
+                    list,
+                    addTodo,
+                    removeTodo
+                }
+              }
+            }).mount('#app')
+          </script>
+    </body>
+</html>
